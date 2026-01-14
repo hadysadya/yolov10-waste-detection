@@ -37,7 +37,7 @@ This project aims to build an object detection model capable of detecting and cl
 
 The model was tested on real-world images and successfully detected small waste objects with high confidence. 
 
-![Inference Result](assets/inference_sample.jpg)
+![Inference Result](assets/inference_sample_v2.jpg)
 
 ## My Role (Machine Learning Engineer)
 
