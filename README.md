@@ -32,14 +32,20 @@ waste objects in real-world environments.
 - Framework: Ultralytics YOLOv10
 - Hardware: NVIDIA Tesla T4 (Google Colab)
 
+## Experiment Comparison
+
+| Version | Dataset Size | Precision | Recall | mAP@50 | mAP@50–95 |
+|--------|-------------|-----------|--------|--------|-----------|
+| v1 (Baseline) | 500 images | 0.432 | 0.294 | 0.317 | 0.240 |
+| v2 (Fine-Tuned) | 1,400 images | 0.545 | 0.421 | 0.469 | 0.344 |
+
+The baseline experiment establishes an initial performance reference, while
+the fine-tuned model demonstrates improved detection capability after training
+on a larger and more diverse dataset.
+
 ## Results
 
 ### Training Results (v2)
-
-- Precision: 0.545
-- Recall: 0.421
-- mAP@50: 0.469
-- mAP@50–95: 0.344
 
 These results represent realistic performance on a limited, real-world dataset
 and serve as a strong baseline for further improvements.
@@ -52,6 +58,11 @@ The fine-tuned model was evaluated on unseen real-world images and demonstrated
 the ability to detect small waste objects under varying conditions.
 
 ![Inference Result](assets/inference_sample_v2.jpg)
+
+## Notebooks
+
+- [Baseline Training (v1)](notebook/yolov10_waste_v1_baseline.ipynb)
+- [Fine-Tuning Experiment (v2)](notebook/yolov10_waste_v2_finetune.ipynb)
 
 ## My Role
 
