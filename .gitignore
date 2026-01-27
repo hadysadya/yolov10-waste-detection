@@ -1,5 +1,11 @@
 __pycache__/
-*.pt
 *.zip
-runs/
 .ipynb_checkpoints/
+
+# Exclude training outputs, keep final weights
+runs/
+*.onnx
+*.engine
+
+# Keep these
+!models/*.pt
