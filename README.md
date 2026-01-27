@@ -1,78 +1,66 @@
-# YOLOv10-Based Waste Detection System (Baseline & Fine-Tuned)
+# ♻️ YOLOv10 Waste Detection
 
-An object detection system for classifying waste into plastic, paper, metal,
-glass, and organic categories using YOLOv10. This project demonstrates an
-iterative training approach, starting from a baseline model and improving
-performance through fine-tuning.
+YOLOv10 waste detection (5 classes) - baseline + fine-tuned models on TACO dataset subset.
 
-## Problem Statement
+## 🎯 Problem Statement
 
-Waste classification is a challenging computer vision problem due to object
-variety, lighting conditions, occlusion, and background noise. This project
-aims to build an object detection model capable of detecting and classifying
-waste objects in real-world environments.
+Waste classification in real-world environments with varying lighting, occlusion, and background noise.
 
-## Dataset
+## 📊 Dataset
 
-- Derived from the **TACO Dataset (Trash Annotations in Context)**  
-  https://github.com/pedropro/TACO
-- Curated and filtered subset for waste classification
-- Total images: 1,400
-- Classes: plastic, paper, metal, glass, organic
-- Split: train / validation / test
-- Format: YOLO
-- Preprocessing: resize to 640×640, auto-orient
+- **Source:** TACO Dataset (curated subset)
+- **Size:** 1,400 images
+- **Classes:** plastic, paper, metal, glass, organic
+- **Split:** 70% train / 20% val / 10% test
+- **Format:** YOLO (640×640)
 
-## Model & Training
+## 🚀 Quick Start
 
-- Model architecture: YOLOv10s
-- Training strategy:
-  - **v1 (Baseline):** trained on 500 images
-  - **v2 (Fine-Tuning):** continued training on an expanded dataset of 1,400 images
-- Framework: Ultralytics YOLOv10
-- Hardware: NVIDIA Tesla T4 (Google Colab)
+### Installation
+```bash
+git clone https://github.com/hadysadya/yolov10-waste-detection.git
+cd yolov10-waste-detection
+pip install ultralytics
+```
 
-## Experiment Comparison
+### Inference
+```bash
+yolo task=detect mode=predict \
+  model=models/finetuned_best.pt \
+  source=path/to/image.jpg \
+  conf=0.25
+```
 
-| Version | Dataset Size | Precision | Recall | mAP@50 | mAP@50–95 |
-|--------|-------------|-----------|--------|--------|-----------|
-| v1 (Baseline) | 500 images | 0.432 | 0.294 | 0.317 | 0.240 |
-| v2 (Fine-Tuned) | 1,400 images | 0.545 | 0.421 | 0.469 | 0.344 |
+### Training
+Full training pipeline available in notebooks:
+- [Baseline Training](notebook/v1_baseline.ipynb)
+- [Fine-tuning](notebook/v2_finetune.ipynb)
 
-The baseline experiment establishes an initial performance reference, while
-the fine-tuned model demonstrates improved detection capability after training
-on a larger and more diverse dataset.
+## 📈 Results
 
-## Results
+| Version | Dataset | Precision | Recall | mAP@50 | mAP@50-95 |
+|---------|---------|-----------|--------|--------|-----------|
+| Baseline | 500 | 0.432 | 0.294 | 0.317 | 0.240 |
+| Fine-tuned | 1,400 | 0.545 | 0.421 | 0.469 | 0.344 |
 
-### Training Results (v2)
+### Training Curves
+![Training Results](assets/training/finetuned_results.png)
 
-These results represent realistic performance on a limited, real-world dataset
-and serve as a strong baseline for further improvements.
+### Inference Example
+![Inference Result](assets/inference/sample_v2.jpg)
 
-![Training Results](assets/training_v2_results.png)
+## 🗂️ Model Weights
 
-## Inference Example
+- **Baseline:** `models/baseline_best.pt` (16MB)
+- **Fine-tuned:** `models/finetuned_best.pt` (16MB)
 
-The fine-tuned model was evaluated on unseen real-world images and demonstrated
-the ability to detect small waste objects under varying conditions.
+## 🛠️ Tech Stack
+- **Model:** YOLOv10s
+- **Framework:** Ultralytics
+- **Hardware:** NVIDIA Tesla T4 (Google Colab)
 
-![Inference Result](assets/inference_sample_v2.jpg)
+## 🔮 Future Work
 
-## Notebooks
-
-- [Baseline Training (v1)](notebook/yolov10_waste_v1_baseline.ipynb)
-- [Fine-Tuning Experiment (v2)](notebook/yolov10_waste_v2_finetune.ipynb)
-
-## My Role
-
-- Dataset curation and preprocessing from the TACO dataset
-- Baseline training and fine-tuning of the YOLOv10 model
-- Model evaluation and result analysis
-- Preparing the model for backend and API-based deployment
-
-## Future Work
-
-- Improve organic waste detection with targeted data collection
-- Apply additional data augmentation and hyperparameter tuning
-- Deploy the model as a REST API for mobile or web integration
+- Improve organic waste detection with targeted augmentation
+- Hyperparameter tuning for better recall
+- Deploy as REST API for mobile/web integration
