@@ -2,10 +2,14 @@ __pycache__/
 *.zip
 .ipynb_checkpoints/
 
-# Exclude training outputs, keep final weights
+# Training
 runs/
 *.onnx
 *.engine
 
-# Keep these
+# IDE & OS
+.vscode/
+.DS_Store
+
+# Keep weights
 !models/*.pt
